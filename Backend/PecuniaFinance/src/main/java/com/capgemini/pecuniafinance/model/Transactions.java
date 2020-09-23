@@ -1,4 +1,4 @@
-package com.capgemini.model;
+package com.capgemini.pecuniafinance.model;
 
 import java.util.Date;
 

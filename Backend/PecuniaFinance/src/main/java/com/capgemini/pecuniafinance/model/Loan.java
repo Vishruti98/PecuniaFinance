@@ -1,4 +1,4 @@
-package com.capgemini.model;
+package com.capgemini.pecuniafinance.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

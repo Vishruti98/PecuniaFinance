@@ -1,4 +1,4 @@
-package com.capgemini.model;
+package com.capgemini.pecuniafinance.model;
 
 import java.util.Date;
 
@@ -10,8 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.capgemini.model.Account;
-
+import com.capgemini.pecuniafinance.model.Account;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity

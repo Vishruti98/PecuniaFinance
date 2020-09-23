@@ -1,4 +1,4 @@
-package com.capgemini.model;
+package com.capgemini.pecuniafinance.model;
 
 
 import javax.persistence.CascadeType;
@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
-import com.capgemini.model.Customer;
-
+import com.capgemini.pecuniafinance.model.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
