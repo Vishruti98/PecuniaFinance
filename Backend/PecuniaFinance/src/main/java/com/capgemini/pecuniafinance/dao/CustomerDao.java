@@ -7,5 +7,5 @@ import com.capgemini.pecuniafinance.model.Customer;
 
 @Repository
 public interface CustomerDao extends JpaRepository<Customer, Integer>{
-
+	
 }
