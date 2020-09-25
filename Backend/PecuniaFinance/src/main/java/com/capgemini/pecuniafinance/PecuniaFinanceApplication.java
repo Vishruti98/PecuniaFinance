@@ -8,6 +8,6 @@ public class PecuniaFinanceApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PecuniaFinanceApplication.class, args);
-	}
+	} 
 
-}
+}  

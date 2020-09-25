@@ -1,45 +1,84 @@
 package com.capgemini.pecuniafinance.service;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.capgemini.pecuniafinance.dao.AccountDao;
 import com.capgemini.pecuniafinance.dao.CustomerDao;
 import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Customer;
 
-public class CustomerServiceImpl implements CustomerService{
-	
+@Service
+@Transactional
+public class CustomerServiceImpl implements CustomerService {
+
+	Logger logger = LoggerFactory.getLogger(CustomerService.class);
+
 	@Autowired
 	CustomerDao customerDao;
-	
-	@Autowired 
+
+	@Autowired
 	AccountDao accountDao;
-	
+
 	Account account;
 	Customer user;
-	
-	static long accountNo=987625361231l;
-	
+
+	static long accountNo = 987625361231l;
+
 	@Override
-	public Customer addUser(Customer customer,Account account) {
-		//account=new Account();
+	public Customer addUser(Customer customer, Account account) {
+		logger.trace("Add User method accessed at service layer");
 		account.setAccountId(accountNo);
 		accountNo++;
 		account.setAmount(0.0);
-		//account.setAccountType("Saving Account");
-		//account.setBranch("EPIP Bangalore");
 		customer.setAccount(account);
 		account.setCustomer(customer);
-		user=customerDao.save(customer);	
+		user = customerDao.save(customer);
+		accountDao.save(account);
 		return user;
 	}
 
 	@Override
 	public Customer updateUser(Customer customer) {
-		Customer user=customerDao.save(customer);
-		return user;
+		logger.trace("Update Customer details method accessed at service layer");
+		Optional<Customer> findById = customerDao.findById(customer.getCustomerId());
+		if (findById.isPresent()) {
+			Customer updatedCustomer = customerDao.save(customer);
+			return updatedCustomer;
+		}
+		return null;
 	}
 
-	
-	
+	public String removeUserById(long customer_id, long account_id) {
+		logger.trace("Delete Customer account method accessed at service layer");
+		Optional<Customer> findCustomer = customerDao.findById(customer_id);
+		Optional<Account> findAccount = accountDao.findById(account_id);
+		if (findCustomer.isPresent() && findAccount.isPresent()) {
+			accountDao.deleteById(account_id);
+			customerDao.deleteById(customer_id);
+			return "User Removed";
+		}
+		return "User Not Found";
+
+	}
+
+	@Override
+	public List<Customer> getAllCustomer() {
+		logger.trace("Get all customers method accessed at service layer");
+		return customerDao.findAll();
+	}
+
+	@Override
+	public Optional<Customer> getCustomerById(long customerId) {
+		logger.trace("Get customer by id method accessed at service layer");
+		return customerDao.findById(customerId);
+	}
+
 }

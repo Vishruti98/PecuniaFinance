@@ -6,12 +6,15 @@ import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
 import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Customer;
+import com.capgemini.pecuniafinance.model.Loan;
 import com.capgemini.pecuniafinance.service.CustomerService;
+import com.capgemini.pecuniafinance.service.LoanService;
 
 class PecuniaFinanceApplicationsMockitoTests {
 
@@ -55,5 +58,84 @@ class PecuniaFinanceApplicationsMockitoTests {
 		Customer updateCustomer=customerService.updateUser(customer);
 		assertEquals("VMalviya",updateCustomer.getName());
 		assertEquals(1610303l,updateCustomer.getCustomerId());
+	}
+	
+	@Test
+	public void loanDisbursalTest() {
+	
+		LoanService loanService=mock(LoanService.class);
+		Loan loan_a = new Loan();
+		loan_a.setLoanId(4L);
+		loan_a.setLoanAmount(50000.0);
+		loan_a.setTenure(24);
+		loan_a.setCreditScore(768);
+		loan_a.setRateOfInterest(7.8);
+		loan_a.setLoanStatus("Accepted");
+		loan_a.setLoanType("Personal Loan");
+		
+		Account account = new Account();
+		account.setAccountId(1L);
+		account.setAccountType("Savings");
+		account.setAmount(80000);
+		account.setBranch("Delhi");
+		
+		Customer customer = new Customer();
+		customer.setAadhaar(649282422559L);
+		customer.setContact(9976564554L);
+		customer.setCustomerId(2L);
+		customer.setDob(new Date(1998,7,8));
+		customer.setGender("Female");
+		customer.setName("Akriti Goyal");
+		customer.setPan("123CT34545");
+		customer.setPassword("akriti");
+		
+		account.setCustomer(customer);
+		customer.setAccount(account);
+		
+		loan_a.setAccount(account);
+		
+		when(loanService.loanDisbursal(loan_a)). thenReturn("Accepted");
+		String status=loanService.loanDisbursal(loan_a);
+		
+		assertEquals("Accepted",status);
+	}
+	
+	@Test
+	public void addLoanRequestTest() {
+		
+		LoanService loanService=mock(LoanService.class);
+		Loan loan_a = new Loan();
+		loan_a.setLoanId(4001L);
+		loan_a.setLoanAmount(50000.0);
+		loan_a.setTenure(24);
+		loan_a.setCreditScore(768);
+		loan_a.setRateOfInterest(7.8);
+		loan_a.setLoanStatus("Pending");
+		loan_a.setLoanType("Personal Loan");
+		
+		Account account = new Account();
+		account.setAccountId(1L);
+		account.setAccountType("Savings");
+		account.setAmount(80000);
+		account.setBranch("Bangalore");
+		
+		Customer customer = new Customer();
+		customer.setAadhaar(649282422559L);
+		customer.setContact(9976564554L);
+		customer.setCustomerId(2L);
+		customer.setDob(new Date(1998,7,8));
+		customer.setGender("Female");
+		customer.setName("Debashish Goyal");
+		customer.setPan("123CT34592");
+		customer.setPassword("debashish");
+		
+		account.setCustomer(customer);
+		customer.setAccount(account);
+		
+		loan_a.setAccount(account);
+		
+		when(loanService.addLoanRequest(loan_a)).thenReturn(loan_a);
+		Loan requestedLoan=loanService.addLoanRequest(loan_a);
+		assertEquals(4001,requestedLoan.getLoanId());
 	}
 }

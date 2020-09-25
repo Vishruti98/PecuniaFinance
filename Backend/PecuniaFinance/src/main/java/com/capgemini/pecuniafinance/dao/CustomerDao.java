@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.capgemini.pecuniafinance.model.Customer;
 
 @Repository
-public interface CustomerDao extends JpaRepository<Customer, Integer>{
-	
+public interface CustomerDao extends JpaRepository<Customer, Long>{
+		
 }
+ 

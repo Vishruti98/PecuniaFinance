@@ -8,9 +8,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
+import com.capgemini.pecuniafinance.error.InvalidValidationException;
+import com.capgemini.pecuniafinance.error.RecordNotFoundException;
 import com.capgemini.pecuniafinance.model.Account;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -21,28 +30,31 @@ public class Customer {
 	@Column(name="customer_id")
 	private long customerId;
 	
-	@Column(name="name")
+	
+	@Column(name="name",nullable=false)
 	private String name;
 	
-	@Column(name="password")
+	@Column(name="password",nullable=false)
 	private String password;
 	
-	@Column(name="contact")
+	@Column(name="contact",unique=true,nullable=false)
 	private long contact;
 	
-	@Column(name="aadhaar")
+	@Column(name="aadhaar",unique=true,nullable=false)
 	private long aadhaar;
 	
-	@Column(name="pan")
+	@Column(name="pan",unique=true,nullable=false)
 	private String pan;
 	
-	@Column(name="dob")
+	@Column(name="dob",nullable=false)
+	@JsonFormat(pattern="dd-MM-yyyy")
 	private Date dob;
 	
-	@Column(name="gender")
+	@Column(name="gender",nullable=false)
 	private String gender;
 	
-	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customer")
+	@OneToOne(cascade = CascadeType.MERGE, mappedBy = "customer")
+	@JoinColumn(name = "account_id")
 	@JsonManagedReference
 	private Account account;
 	
@@ -51,7 +63,7 @@ public class Customer {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Customer(long customerId, String name, String password, long contact, long aadhaar, String pan, Date dob,
+	public Customer(long customerId, String name,String password, long contact, long aadhaar, String pan, Date dob,
 			String gender, Account account) {
 		super();
 		this.customerId = customerId;
@@ -87,8 +99,17 @@ public class Customer {
 		return contact;
 	}
 	public void setContact(long contact) {
-		this.contact = contact;
+		try {
+			if(String.valueOf(contact).length()==10)
+				this.contact = contact;
+			else 
+				throw new InvalidValidationException("Invalid Validation");
+		}
+		catch(Exception e) {
+			throw new InvalidValidationException("Invalid Validation");
+		}
 	}
+		
 	public Account getAccount() {
 		return account;
 	}
@@ -101,13 +122,29 @@ public class Customer {
 		return aadhaar;
 	}
 	public void setAadhaar(long aadhaar) {
-		this.aadhaar = aadhaar;
+		try {
+			if(String.valueOf(aadhaar).length()==12)
+				this.aadhaar = aadhaar;
+			else 
+				throw new InvalidValidationException("Invalid Validation");
+		}
+		catch(Exception e) {
+			throw new InvalidValidationException("Invalid Validation");
+		}
 	}
 	public String getPan() {
 		return pan;
 	}
 	public void setPan(String pan) {
-		this.pan = pan;
+		try {
+			if(String.valueOf(pan).length()==10)
+				this.pan = pan;
+			else 
+				throw new InvalidValidationException("Invalid Validation");
+		}
+		catch(Exception e) {
+			throw new InvalidValidationException("Invalid Validation");
+		}
 	}
 	public Date getDob() {
 		return dob;

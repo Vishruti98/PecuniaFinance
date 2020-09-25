@@ -9,29 +9,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotBlank;
 
 import com.capgemini.pecuniafinance.model.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
-@Entity
+@Entity 
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "mySeqGen", sequenceName = "mySeq", initialValue = 67582300, allocationSize = 100)
+	 @GeneratedValue(generator = "mySeqGen")
 	@Column(name="account_id")
 	private long accountId;
 	
-	@Column(name="branch")
+	@Column(name="branch",nullable=false)
 	private String branch;
 	
-	@Column(name="account_type")
+	@Column(name="account_type",nullable=false)
 	private String accountType;
 	
 	@Column(name="amount")
 	private double amount;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "customer_id")
 	@JsonBackReference
 	private Customer customer;
