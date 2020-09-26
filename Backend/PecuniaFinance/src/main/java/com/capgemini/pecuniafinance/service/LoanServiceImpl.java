@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.pecuniafinance.dao.AccountDao;
 import com.capgemini.pecuniafinance.dao.LoanDao;
+import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Loan;
 
 @Service("loanServiceImpl")
@@ -15,22 +17,23 @@ public class LoanServiceImpl implements LoanService{
 
 	@Autowired
 	LoanDao loanDao;
-	
+	@Autowired
+	AccountDao accountDao;
 	
 	Loan loan;
 	
-	//Creates and adds a new Loan Request
+	
 	@Override
 	 public Loan addLoanRequest( Loan loan) {
 			
-			Optional <Loan> findById = loanDao.findById(loan.getLoanId());
-			if(!findById.isPresent())
+			Optional <Account> findById = accountDao.findById(loan.getAccount().getAccountId());
+			if(findById.isPresent())
 			{   loan.setLoanStatus("Pending");
-			    if(loan.getLoanType()=="Holiday Loan")
+			    if(loan.getLoanType().equalsIgnoreCase("Holiday Loan"))
 			    	loan.setRateOfInterest(11.67);
-			    else if(loan.getLoanType()=="Personal Loan")
+			    else if(loan.getLoanType().equalsIgnoreCase("Personal Loan"))
 			    	loan.setRateOfInterest(10.75);
-			    else if(loan.getLoanType()=="Medical Loan")
+			    else if(loan.getLoanType().equalsIgnoreCase("Medical Loan"))
 			    	loan.setRateOfInterest(13.2);
 			    else
 			    	loan.setRateOfInterest(12.99);
@@ -40,7 +43,7 @@ public class LoanServiceImpl implements LoanService{
 			return null;
 		}
 	 
-	//Checks whether loan should be disbursed or not and updates the account balance accordingly
+	
 	@Override
 	public String loanDisbursal(Loan loan) {
 		
@@ -57,7 +60,6 @@ public class LoanServiceImpl implements LoanService{
 		    return "Rejected";
 	}
 
-  //Fetches loan history for an Account Id
 	@Override
 	public List<Loan> getLoanHistory(long account_id) {
 		
