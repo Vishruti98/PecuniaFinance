@@ -1,5 +1,6 @@
 package com.capgemini.pecuniafinance.error;
 
+@SuppressWarnings("serial")
 public class InvalidLoginCredentialsException extends Exception {
 
 

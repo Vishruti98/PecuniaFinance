@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.pecuniafinance.service.TransactionService;
-import com.capgemini.pecuniafinance.exceptions.AccountIdNotFound;
+import com.capgemini.pecuniafinance.error.AccountIdNotFound;
 import com.capgemini.pecuniafinance.model.Transactions;
 @RestController
 @RequestMapping("/bank")

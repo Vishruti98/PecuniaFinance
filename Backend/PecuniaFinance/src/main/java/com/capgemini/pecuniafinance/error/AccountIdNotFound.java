@@ -1,4 +1,4 @@
-package com.capgemini.pecuniafinance.exceptions;
+package com.capgemini.pecuniafinance.error;
 
 @SuppressWarnings("serial")
 public class AccountIdNotFound extends Exception{
