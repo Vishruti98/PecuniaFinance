@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.capgemini.pecuniafinance.error.InvalidLoginCredentialsException;
 import com.capgemini.pecuniafinance.error.RecordNotFoundException;
 import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Customer;
@@ -132,9 +133,19 @@ public class CustomerController {
 				return user;
 		}
 		
+		@PostMapping("/login")
+		public String userLogin(@RequestBody NewUser user) throws InvalidLoginCredentialsException{
+			logger.trace("Login method accessed at controller");
+			return customerService.userLogin(user.customerId, user.password);
+		}
+		
 		
 }
 class SignUp{
 	public Customer customer;
 	public Account account;
+}
+class NewUser{
+	public long customerId;
+	public String password;
 }

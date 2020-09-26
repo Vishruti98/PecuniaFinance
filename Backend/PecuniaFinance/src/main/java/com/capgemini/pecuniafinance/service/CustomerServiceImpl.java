@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.pecuniafinance.dao.AccountDao;
 import com.capgemini.pecuniafinance.dao.CustomerDao;
+import com.capgemini.pecuniafinance.error.InvalidLoginCredentialsException;
 import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Customer;
 
@@ -79,6 +80,34 @@ public class CustomerServiceImpl implements CustomerService {
 	public Optional<Customer> getCustomerById(long customerId) {
 		logger.trace("Get customer by id method accessed at service layer");
 		return customerDao.findById(customerId);
+	}
+
+	@Override
+	public String userLogin(long customerId, String password) throws InvalidLoginCredentialsException {
+		Customer user=customerDao.getOne(customerId);
+		try {
+
+			if(user==null) {
+				logger.error("InvalidLoginCredentialsException thrown by the method");
+				throw new InvalidLoginCredentialsException("User does not exist");
+			}
+			else
+			{
+				if(user.getCustomerId()==customerId && user.getPassword().equals(password)) {
+					logger.info("Login Successful");
+					return "Login Successful";
+				}
+				else {
+					logger.error("InvalidLoginCredentialsException thrown by the method");
+					throw new InvalidLoginCredentialsException("Invalid Customer Id or Password");
+				}
+			}
+
+
+		}catch(Exception ex) {
+			logger.error("InvalidLoginCredentialsException thrown by the method");
+			throw new InvalidLoginCredentialsException("An error has occured!Please try again");
+		}
 	}
 
 }
