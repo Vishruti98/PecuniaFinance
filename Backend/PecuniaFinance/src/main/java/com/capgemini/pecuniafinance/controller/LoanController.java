@@ -31,7 +31,12 @@ public class LoanController {
 	String status;
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoanController.class);
 	
-	
+	/* Method:addLoanRequest
+	 * Type: PostMapping
+	 * Description: When /addLoanRequest is mapped with client request, addLoanRequest method is called at Service Layer
+	 * @param Loan: loan
+	 * @return Loan: a Loan object is returned to notify that a new Loan Request is added
+ 	*/
 	@PostMapping("/addLoanRequest")
 	@ExceptionHandler(RecordNotFoundException.class)
 	public Loan addLoanRequest(@RequestBody Loan loan) {
@@ -52,6 +57,12 @@ public class LoanController {
 
 	}
 	
+	/* Method:loanDisbursal
+	 * Type: PutMapping
+	 * Description: When /loanDisbursal is mapped with client request, loanDisbursal method is called at Service Layer
+	 * @param  Loan: loan
+	 * @return String: a string is returned to notify that Loan Request is accepted or rejected
+	*/
 	@PutMapping("/loanDisbursal")
 	@ExceptionHandler(RecordNotFoundException.class)
 	public String loanDisbursal(@RequestBody Loan loan) {
@@ -72,6 +83,12 @@ public class LoanController {
 
 	}
 	
+	/* Method:showLoanHistory
+	 * Type: GetMapping
+	 * Description: When it is mapped with client request, getAllCustomer method is called at Service Layer
+	 * @param  Long: account_id
+	 * @return List<Loan>: a list of all loan request w.r.t a particular account_id are returned
+	*/
 	@GetMapping("/showLoanHistory/{id}")
 	@ExceptionHandler(RecordNotFoundException.class)
 	public List<Loan> showLoanHistory(@PathVariable("id") long account_id) {
@@ -93,4 +110,3 @@ public class LoanController {
 	
 	
 }
-
