@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Transactions {
 
@@ -15,8 +17,8 @@ public class Transactions {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="transaction_id")
 	private long transactionId;
-	
 	@Column(name="transaction_date")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date transactionDate;
 	
 	@Column(name="transaction_type")
@@ -66,7 +68,7 @@ public class Transactions {
 	public Date getTransactionDate() {
 		return transactionDate;
 	}
-
+	
 	public void setTransactionDate(Date transactionDate) {
 		this.transactionDate = transactionDate;
 	}
