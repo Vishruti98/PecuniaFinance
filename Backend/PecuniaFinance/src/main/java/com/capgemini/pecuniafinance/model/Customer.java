@@ -10,15 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Length;
-
 import com.capgemini.pecuniafinance.error.InvalidValidationException;
-import com.capgemini.pecuniafinance.error.RecordNotFoundException;
-import com.capgemini.pecuniafinance.model.Account;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 

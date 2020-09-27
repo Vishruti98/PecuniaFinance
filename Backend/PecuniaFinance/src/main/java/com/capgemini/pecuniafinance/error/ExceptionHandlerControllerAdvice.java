@@ -25,4 +25,11 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		ExceptionResponse error = new ExceptionResponse(exception.getLocalizedMessage());
 		return error;
 	}
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public @ResponseBody ExceptionResponse handleInvalidUser(final UserNotFoundException exception,final HttpServletRequest request) {
+		ExceptionResponse error = new ExceptionResponse(exception.getLocalizedMessage());
+		return error;
+	}
 }
