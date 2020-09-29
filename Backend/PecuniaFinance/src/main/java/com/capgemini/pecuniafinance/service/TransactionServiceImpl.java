@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Transactions;
-import com.capgemini.pecuniafinance.dao.AccountDao;
 import com.capgemini.pecuniafinance.dao.TransactionsDao;
 @Service
 public class TransactionServiceImpl implements TransactionService {

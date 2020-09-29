@@ -5,14 +5,10 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.NotBlank;
-
-import com.capgemini.pecuniafinance.model.Customer;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
@@ -20,9 +16,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 public class Account {
 
 	@Id
-	//@GeneratedValue(strategy = GenerationType.AUTO)
 	@SequenceGenerator(name = "mySeqGen", sequenceName = "mySeq", initialValue = 67582300, allocationSize = 100)
-	 @GeneratedValue(generator = "mySeqGen")
+	@GeneratedValue(generator = "mySeqGen")
 	@Column(name="account_id")
 	private long accountId;
 	

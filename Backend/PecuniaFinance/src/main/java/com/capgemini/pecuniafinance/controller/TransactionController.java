@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.pecuniafinance.service.TransactionService;
-import com.capgemini.pecuniafinance.error.AccountIdNotFound;
+import com.capgemini.pecuniafinance.error.AccountIdNotFoundException;
 import com.capgemini.pecuniafinance.model.Transactions;
 @RestController
 @RequestMapping("/bank")
@@ -34,7 +34,7 @@ public class TransactionController {
 	 * @return Balance: a balance value is returned to notify that this the account balance.
  	*/
 	@RequestMapping("/showBalance/{id}")
-	@ExceptionHandler(AccountIdNotFound.class)
+	@ExceptionHandler(AccountIdNotFoundException.class)
 	public double showBalance(@PathVariable("id") long accountid) {
 		logger.trace("Show balance method accessed at controller");
 		double balance = 0;
@@ -43,7 +43,8 @@ public class TransactionController {
 
 		} catch (Exception e) {
 
-			logger.info(e.getMessage(), HttpStatus.NOT_FOUND);
+			logger.error(e.getMessage(), HttpStatus.NOT_FOUND);
+			throw new AccountIdNotFoundException("Account Not Found");
 
 		}
 		return balance;

@@ -31,13 +31,10 @@ public class CustomerServiceImpl implements CustomerService {
 	Account account;
 	Customer user;
 
-	static long accountNo = 987625361231l;
 
 	@Override
 	public Customer addUser(Customer customer, Account account) {
 		logger.trace("Add User method accessed at service layer");
-		account.setAccountId(accountNo);
-		accountNo++;
 		account.setAmount(0.0);
 		customer.setAccount(account);
 		account.setCustomer(customer);
@@ -84,30 +81,18 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public String userLogin(long customerId, String password) throws InvalidLoginCredentialsException {
-		Customer user=customerDao.getOne(customerId);
-		try {
-
-			if(user==null) {
-				logger.error("InvalidLoginCredentialsException thrown by the method");
-				throw new InvalidLoginCredentialsException("User does not exist");
+		if (customerDao.findById(customerId).isPresent()) {
+			Customer user = customerDao.getOne(customerId);
+			System.out.println(user);
+			if (user.getCustomerId() == customerId && user.getPassword().equals(password)) {
+				logger.info("Login Successful");
+				return "Login Successful";
 			}
+
 			else
-			{
-				if(user.getCustomerId()==customerId && user.getPassword().equals(password)) {
-					logger.info("Login Successful");
-					return "Login Successful";
-				}
-				else {
-					logger.error("InvalidLoginCredentialsException thrown by the method");
-					throw new InvalidLoginCredentialsException("Invalid Customer Id or Password");
-				}
-			}
-
-
-		}catch(Exception ex) {
-			logger.error("InvalidLoginCredentialsException thrown by the method");
-			throw new InvalidLoginCredentialsException("An error has occured!Please try again");
+				return null;
 		}
+		return null;
 	}
 
 }

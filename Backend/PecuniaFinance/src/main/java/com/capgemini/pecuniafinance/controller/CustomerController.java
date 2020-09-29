@@ -55,7 +55,7 @@ public class CustomerController {
 		 * @return Customer: a Customer object is returned to notify that Customer Details are updated
 		*/		
 		@PutMapping("/updateCustomer")
-		public Customer updateCustomer(@RequestBody Customer customer) throws UserNotFoundException{
+		public Customer updateCustomer(@RequestBody Customer customer){
 			logger.trace("Update customer details method accessed at controller");
 			Customer user = new Customer();
 
@@ -66,7 +66,7 @@ public class CustomerController {
 				throw new UserNotFoundException("Record Not Found");
 		} 
 		catch (Exception e) {
-				logger.info(e.getMessage(), HttpStatus.NOT_FOUND);
+				logger.error(e.getMessage(), HttpStatus.NOT_FOUND);
 				throw new UserNotFoundException("Record Not Found");
 		} 
 			return user;
@@ -80,7 +80,7 @@ public class CustomerController {
 		 * @return String: a message is returned to notify that Customer Account at given id is deleted or not
 		*/
 		@DeleteMapping("/deleteCustomer/{customer_id}/{account_id}")
-		public String removeUserById(@PathVariable("customer_id") long customer_id, @PathVariable("account_id") long account_id) throws UserNotFoundException{
+		public String removeUserById(@PathVariable("customer_id") long customer_id, @PathVariable("account_id") long account_id){
 			logger.trace("Delete customer account method accessed at controller");
 			String msg = null;
 
@@ -91,7 +91,7 @@ public class CustomerController {
 					throw new UserNotFoundException("Record Not Found");
 
 			} catch (Exception e) {
-				logger.info(e.getMessage(), HttpStatus.NOT_FOUND);
+				logger.error(e.getMessage(), HttpStatus.NOT_FOUND);
 				throw new UserNotFoundException("Record Not Found");
 
 			}
@@ -116,26 +116,35 @@ public class CustomerController {
 		 * @return Optional<Customer>: Customer details are returned of the given customer id 
 		*/
 		@GetMapping("/getCustomerById/{customer_id}")
-		public Optional<Customer> getCustomerById(@PathVariable("customer_id")long customerId) throws UserNotFoundException{
+		public Optional<Customer> getCustomerById(@PathVariable("customer_id")long customerId){
 			logger.trace("Get customer by id method accessed at controller");
 			Optional<Customer> user = Optional.of(new Customer());
 			try {
 				user=customerService.getCustomerById(customerId);
-				System.out.println(user);
 					if(!(user.isPresent()))
 					throw new UserNotFoundException("Record Not Found");
 			}
 			catch (Exception e) {
-				logger.info(e.getMessage(), HttpStatus.NOT_FOUND);
+				logger.error(e.getMessage(), HttpStatus.NOT_FOUND);
 				throw new UserNotFoundException("Record Not Found");
 			} 
 				return user;
 		}
 		
 		@PostMapping("/login")
-		public String userLogin(@RequestBody NewUser user) throws InvalidLoginCredentialsException{
+		public String userLogin(@RequestBody NewUser user){
 			logger.trace("Login method accessed at controller");
-			return customerService.userLogin(user.customerId, user.password);
+			String msg=null;
+			try{
+				msg=customerService.userLogin(user.customerId, user.password);
+				if(msg==null)
+					throw new InvalidLoginCredentialsException("Record Not Found");
+			}
+			catch (Exception e) {
+				logger.error(e.getMessage(), HttpStatus.NOT_FOUND);
+				throw new InvalidLoginCredentialsException("Record Not Found");
+			} 
+			return msg;		
 		}
 		
 		

@@ -32,4 +32,18 @@ public class ExceptionHandlerControllerAdvice extends ResponseEntityExceptionHan
 		ExceptionResponse error = new ExceptionResponse(exception.getLocalizedMessage());
 		return error;
 	}
+	
+	@ExceptionHandler(RecordNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public @ResponseBody ExceptionResponse handleRecordNotFound(final RecordNotFoundException exception,final HttpServletRequest request) {
+		ExceptionResponse error = new ExceptionResponse(exception.getLocalizedMessage());
+		return error;
+	}
+	
+	@ExceptionHandler(AccountIdNotFoundException.class)
+	@ResponseStatus(value = HttpStatus.NOT_FOUND)
+	public @ResponseBody ExceptionResponse handleAccountIdNotFound(final AccountIdNotFoundException exception,final HttpServletRequest request) {
+		ExceptionResponse error = new ExceptionResponse(exception.getLocalizedMessage());
+		return error;
+	}
 }
