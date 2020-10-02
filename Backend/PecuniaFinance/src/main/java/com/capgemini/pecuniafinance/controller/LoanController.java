@@ -32,13 +32,16 @@ public class LoanController {
 	/* Method:addLoanRequest
 	 * Type: PostMapping
 	 * Description: When /addLoanRequest is mapped with client request, addLoanRequest method is called at Service Layer
-	 * @param Loan: loan
+	 * @param Loan: loan, Long:account_id
 	 * @return Loan: a Loan object is returned to notify that a new Loan Request is added
  	*/
-	@PostMapping("/addLoanRequest")
-	public Loan addLoanRequest(@RequestBody Loan loan){
+	@PostMapping("/addLoanRequest/{id}")
+	public Loan addLoanRequest(@RequestBody Loan loan,@PathVariable("id") long account_id){
 		Loan loanRequest = new Loan();
-
+		Account account = new Account();
+		account.setAccountId(account_id);
+		loan.setAccount(account);
+		
 		try {
 			loanRequest = loanService.addLoanRequest(loan);
 
