@@ -16,7 +16,7 @@ import com.capgemini.pecuniafinance.model.Loan;
 public interface LoanDao extends JpaRepository<Loan, Long>{
 
 	//Retrieves Loan History for a given account number
-	@Query( value = "select * from loan where account_id = :accountid ", nativeQuery=true)
+	@Query( value = "select * from loan where account_id = :accountid order by loan_id desc", nativeQuery=true)
 	List<Loan> getLoanHistory(@Param("accountid") long account_id);
 	
 	//Modifies the Loan Status when the loan is accepted or rejected
