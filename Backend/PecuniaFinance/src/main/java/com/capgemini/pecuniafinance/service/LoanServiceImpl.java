@@ -62,8 +62,10 @@ public class LoanServiceImpl implements LoanService{
 		if(loan.getCreditScore()>=670 && (loan.getLoanAmount()>=1000 && loan.getLoanAmount()<=2500000) && (loan.getTenure()>=12 && loan.getTenure()<=240)) {
 			
 			loanDao.updateStatus(loan.getLoanId(), "Accepted");
+			
+			double balance=loanDao.getAccountBalance(loan.getAccount().getAccountId());
 
-			loanDao.updateBalance(loan.getAccount().getAccountId(), loan.getAccount().getAmount()+loan.getLoanAmount());
+			loanDao.updateBalance(loan.getAccount().getAccountId(), balance+loan.getLoanAmount());
 			
 			return "Accepted";
 		}
