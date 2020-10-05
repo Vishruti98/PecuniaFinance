@@ -1,0 +1,128 @@
+
+<form [formGroup]="depositForm">
+    <div class='container'>
+
+      <h1>Deposit Money</h1><hr>
+
+          <!--input for transaction date-->
+          <div class="form-group">
+            <label for="transactionDate">Transaction Date</label>
+            <input type="date"
+            id="transactionDate"
+            name="transactionDate"
+            placeholder="Enter transaction Date"
+            [formControl]="transactionDate"
+            class="form-control">
+          </div>
+
+          <div *ngIf = "!(transactionDate.valid||transactionDate.untouched)">
+            <div *ngIf = "transactionDate.hasError('required')" >
+                <p class="alert alert-danger"> Transaction Date is empty!</p>
+            </div>
+         </div>
+         
+
+           <!--input for transaction amount-->
+           <div class="form-group">
+            <label for="transactionAmount">Transaction Amount</label>
+            <input type="number"
+            id="transactionAmount"
+            name="transactionAmount"
+            placeholder="Enter transaction amount"
+            [formControl]="transactionAmount"
+            class="form-control">
+          </div>
+
+          <div *ngIf = "!(transactionAmount.valid||transactionAmount.untouched)">
+            <div *ngIf = "transactionAmount.hasError('required')" >
+                <p class="alert alert-danger"> Transaction Amount is empty!</p>
+            </div>
+            <div *ngIf="!(transactionAmount.valid||transactionAmount.untouched)">
+              <p class="alert alert-danger">
+                <strong
+                  > Please enter valid
+                  amount</strong
+                >
+              </p>
+            </div>
+         </div>
+
+           <!--input for transaction mode-->
+
+           <div class="form-group">
+            <label for="transactionMode">Transaction Mode</label>
+
+            <label class="radio-inline"><input type="radio" id="cheque" name="transactionMode" value="cheque" [formControl]="transactionMode" >Cheque</label>
+         <label class="radio-inline"><input type="radio" id="slip" name="transactionMode" value="slip" [formControl]="transactionMode" >Slip</label>
+         <div *ngIf = "!(transactionMode.valid||transactionMode.untouched)">
+          <div *ngIf = "transactionMode.hasError('required')" >
+              <p class="alert alert-danger"> Transaction Mode is empty!</p>
+          </div>
+       </div>
+          </div>
+
+           <!--input for cheque number-->
+           <div *ngIf = "transactionMode.value== 'cheque'" class="form-group">
+            <label for="chequeNumber">Cheque No.</label>
+            <input type="number"
+            id="chequeNumber"
+            name="chequeNumber"
+            placeholder="Enter cheque number"
+            [formControl]="chequeNumber"
+            class="form-control">
+         
+
+          <div *ngIf = "!(chequeNumber.valid||chequeNumber.untouched)">
+            <div *ngIf = "chequeNumber.hasError('required')" >
+                <p class="alert alert-danger"> Cheque No. is empty!</p>
+            </div>
+            <div *ngIf = "chequeNumber.hasError('min') || chequeNumber.hasError('max')" >
+              <p class="alert alert-danger"> Please enter 6-digit Cheque Number!</p>
+          </div>
+         </div>
+
+           <!--input for ifsc-->
+           <div *ngIf = "transactionMode.value== 'cheque'" class="form-group">
+            <label for="transactionType">IFSC</label>
+            <input type="text"
+            id="ifsc"
+            name="ifsc"
+            placeholder="Enter IFSC"
+            [formControl]="ifsc"
+            class="form-control">
+          </div>
+
+          <div *ngIf = "!(ifsc.valid||ifsc.untouched)">
+            <div *ngIf = "ifsc.hasError('required')" >
+                <p class="alert alert-danger"> IFSC is empty!</p>
+            </div>
+            <div *ngIf = "ifsc.hasError('min') || ifsc.hasError('max')" >
+              <p class="alert alert-danger"> Please enter 10-digit IFSC!</p>
+          </div>
+         </div>
+        </div>
+              
+
+          <button  type="submit" class="registerbtn" data-toggle="modal" data-target="#myModal_create" [disabled]="" (click)="onSubmit()">Register</button>
+    
+    <!-- Modal on create-->
+    <div class="modal fade" id="myModal_create" role="dialog" >
+      <div class="modal-dialog">
+      
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+            <h4 class="modal-title">Pecunia Finance</h4>
+          </div>
+          <div class="modal-body">
+            <p>Transaction Successfull!!</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+</form>
+

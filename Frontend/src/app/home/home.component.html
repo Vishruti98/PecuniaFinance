@@ -1,0 +1,42 @@
+<p>home works!</p>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-phone"></span>Pecunia Finance</a>
+      </div>
+     
+       <!-- <ul class="nav navbar-nav">
+         
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="userloginService.isUserLoggedIn()" routerLink="/userprofile" class="nav-link">My Profile</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="userloginService.isUserLoggedIn()" routerLink="/mywallet" class="nav-link">My Wallet</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="userloginService.isUserLoggedIn()" routerLink="/addmoney" class="nav-link">Add Money</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="userloginService.isUserLoggedIn()" routerLink="/transfermoney" class="nav-link">Transfer Money</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="adminloginService.isAdminLoggedIn()" routerLink="/adminprofile" class="nav-link">My Profile</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="adminloginService.isAdminLoggedIn()" routerLink="/validateRegisterdUsers" class="nav-link">Validate Registered Users</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="!userloginService.isUserLoggedIn() && !adminloginService.isAdminLoggedIn()" routerLink="/login" class="nav-link">Login</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="!userloginService.isUserLoggedIn() && !adminloginService.isAdminLoggedIn()" routerLink="/create" class="nav-link">Register</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="userloginService.isUserLoggedIn()" routerLink="/userlogout" class="nav-link" class="pull-right">Logout</a></li>
+        <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a *ngIf="adminloginService.isAdminLoggedIn()" routerLink="/adminlogout" class="nav-link" class="pull-right">Logout</a></li>
+       
+        </ul> -->
+
+        <ul class="nav navbar-nav">
+         
+            <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a routerLink="/home/profile" class="nav-link">My Profile</a></li>
+            <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a  routerLink="/home/passbook" class="nav-link">Passbook</a></li>
+            <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a routerLink="/home/deposit" class="nav-link">Deposit</a></li>
+            <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a  routerLink="/home/withdraw" class="nav-link">Withdraw</a></li>
+            <li routerLinkActive="active" routerLinkActiveOptions="{exact:true}"><a routerLink="/home/loan" class="nav-link">Loan</a></li>
+            
+           
+        </ul>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li><a (click)="logOut()" class="active">Log Out</a> </li>
+            </ul>
+        </div>
+
+    </div>
+    
+  </nav>
+  <router-outlet></router-outlet>

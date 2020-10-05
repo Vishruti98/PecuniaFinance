@@ -1,0 +1,187 @@
+ 
+ <form [formGroup]="registrationForm" (ngSubmit)="save()"> 
+    <div class="container">
+  
+      
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+     <!-- Input for Name -->
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Enter Name" class="form-control" formControlName="name">
+        <div *ngIf="(registrationForm.controls.name.touched && registrationForm.controls.name.errors)">
+          <div class="text-danger" *ngIf="registrationForm.controls.name.errors?.required">
+            <p class="alert alert-danger"> Name is required</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.name.errors?.hasNumber">
+            <p class="alert alert-danger">Name cannot contain numeric values</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.name.errors?.hasCapitalCase">
+            <p class="alert alert-danger">First letter of each word should be capital</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.name.errors?.hasSpecialCharacters">
+            <p class="alert alert-danger"> Name cannot contain special characters</p>
+          </div>
+      </div>
+      </div>
+   
+      <!-- Input for gender -->
+    <div class="form-group" >
+        <label for="gender">Gender</label> 
+       <div class="form-check-inline">
+         <label class="form-check-label" for="male">
+           <input type="radio" class="form-check-input" id="male" name="gender" value="male"  formControlName="gender">Male
+         </label>
+         
+       </div>
+       <div class="form-check-inline">
+         <label class="form-check-label" for="female">
+           <input type="radio" class="form-check-input" id="female" name="gender" value="female" formControlName="gender">Female
+         </label>
+       </div>
+       <div *ngIf="(registrationForm.controls.gender.touched && registrationForm.controls.gender.errors)">
+        <div class="text-danger" *ngIf="registrationForm.controls.gender.errors?.required">
+          <p class="alert alert-danger"> Gender is required</p>
+        </div>
+        </div>
+    </div>
+
+    
+     <!-- Input for DOB -->
+    <div class="form-group">
+        <label for="dob">Date of birth</label>
+        <input type="date" id="dob" name="dob" placeholder="Enter DOB" class="form-control" formControlName="dob">
+        <div *ngIf="(registrationForm.controls.dob.touched && registrationForm.controls.dob.errors)">
+          <div class="text-danger" *ngIf="registrationForm.controls.dob.errors?.required">
+            <p class="alert alert-danger"> DOB is required</p>
+          </div>
+          </div>
+      </div>
+
+    <!-- Input for Phone Number -->
+    <div class="form-group">
+       <label for="contact">Phone Number</label>
+       <input type="number" id="contact" name="contact" placeholder="Enter Phone Number" class="form-control" formControlName="contact">
+       <div *ngIf="(registrationForm.controls.contact.touched && registrationForm.controls.contact.errors)">
+        <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.required">
+          <p class="alert alert-danger"> Contact is required</p>
+        </div>
+        <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.hasPattern">
+          <p class="alert alert-danger">Contact must start with 6,7,8 or 9  </p>
+        </div>
+        <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.maxlength">
+          <p class="alert alert-danger">Contact must contain 10 digits..</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Input for Aadhaar No. -->
+    <div class="form-group">
+        <label for="aadhaar">Aadhaar No.</label>
+        <input type="number"
+        id="aadhaarNo"
+        name="aadhaar"
+        placeholder="Enter Aadhaar No."
+        class="form-control" formControlName="aadhaar">
+        <div *ngIf="(registrationForm.controls.aadhaar.touched && registrationForm.controls.aadhaar.errors)">
+          <div class="text-danger" *ngIf="registrationForm.controls.aadhaar.errors.required">
+            <p class="alert alert-danger"> Aadhaar No. is required</p>
+          </div>
+        </div>
+        
+    </div>
+
+     <!-- Input for PAN No. -->
+    <div class="form-group">
+        <label for="pan">PAN</label>
+        <input type="text" id="pan" name="pan" placeholder="Enter PAN" class="form-control" formControlName="pan">
+        <div *ngIf="(registrationForm.controls.pan.touched && registrationForm.controls.pan.errors)">
+          <div class="text-danger" *ngIf="registrationForm.controls.pan.errors.required">
+            <p class="alert alert-danger"> PAN is required</p>
+          </div>
+          </div>
+     </div>
+
+     <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password"
+        id="password"
+        name="password"
+        placeholder="Enter Password"
+        class="form-control" formControlName="password">
+        <div *ngIf="(registrationForm.controls.password.touched && registrationForm.controls.password.errors) ">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.required">
+              <p class="alert alert-danger"> Password is required </p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.minlength">
+              <p class="alert alert-danger">Password must contain minimum of 8 characters</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasNumber">
+              <p class="alert alert-danger"> Password must contain atleast one numeric value</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasCapitalCase">
+              <p class="alert alert-danger">Password must contain atleast one Capital letter</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasSmallCase">
+              <p class="alert alert-danger"> Password must contin atleast one Small letter</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasSpecialCharacters">
+              <p class="alert alert-danger"> Password must contain atleast one special character</p>
+          </div>
+      </div>
+      </div>
+      
+      <div class="form-group">
+      <label for="branch">Choose Branch : </label>
+      <select name="branch" id="branch" class="form-control" formControlName="branch">
+        <option value="Gurgaon">Gurgaon</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Noida">Noida</option>
+        <option value="Ghaziabad">Ghaziabad</option>
+      </select>
+      <div *ngIf="(registrationForm.controls.branch.touched && registrationForm.controls.branch.errors) ">
+        <div class="text-danger" *ngIf="registrationForm.controls.branch.errors.required">
+          <p class="alert alert-danger"> Branch is required</p>
+        </div>
+        </div>
+      </div>
+
+    <div class="form-group">
+        <label for="accountType">Choose Account Type : </label>
+        <select name="accountType" id="accountType" class="form-control" formControlName="accountType">
+          <option value="saving">Saving Account</option>
+          <option value="salary">Salary Account</option>
+        </select>
+        <div *ngIf="(registrationForm.controls.accountType.touched && registrationForm.controls.accountType.errors) ">
+          <div class="text-danger" *ngIf="registrationForm.controls.accountType.errors.required">
+            <p class="alert alert-danger"> Account Type is required</p>
+          </div>
+          </div>
+    </div>
+
+    <button  type="submit" class="registerbtn" data-toggle="modal" data-target="#myModal_create" [disabled]="!registrationForm.valid" >Register</button>
+
+    <div class="modal fade" id="myModal_create" role="dialog" >
+      <div class="modal-dialog">
+      
+       
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+            <h4 class="modal-title">Online Wallet</h4>
+          </div>
+          <div class="modal-body">
+            <p>Your account has successfully been registered!!</p>
+            <p>Your Customer ID is <font color="blue">{{result?.customerId}}</font></p>
+            <p>Your Account Number is <font color="blue"> {{result?.account.accountId}}</font></p>
+            <br>
+            <p><font color="red">Use Customer ID to login into your account</font></p>
+            
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+ </form>  

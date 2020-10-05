@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Transactions;
 
 @Repository
@@ -20,5 +21,7 @@ public interface TransactionsDao extends JpaRepository<Transactions, Integer>{
 	@Query(value=" select * from Transactions where account_Id=:accountId  and transaction_date>=:startDate and transaction_date<:endDate",nativeQuery=true)
 	List<Transactions> accountSummary(@Param("accountId")long accountId, @Param("startDate")Date startDate,@Param("endDate")Date endDate);
 	
+	@Query("select u from Account u where account_Id=?1")
+	Account get(long accountId);
 
 }

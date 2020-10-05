@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.capgemini.pecuniafinance.service.AccountService;
 
 @RestController
 @RequestMapping("/account") 
+@CrossOrigin("http://localhost:4200")
 public class AccountController {
 	
 	Logger logger=LoggerFactory.getLogger(AccountController.class);

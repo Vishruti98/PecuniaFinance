@@ -1,0 +1,24 @@
+<div class="container" >
+  <div class="col-md-12">
+  <br>
+  <h3 class="text-center"><u>Account Balance</u></h3>
+  <br>
+  <form (ngSubmit)="balance()" #form="ngForm">
+      <div class="form-group">
+          <label ><strong><em>Account Id:</em></strong> </label>
+          <input required type="text" placeholder="Enter ID" #accountIdRef="ngModel" pattern=[0-9]* minlength="8"  maxlength="8"  name="accountId" [(ngModel)]="accountId" class="form-control">
+          <div *ngIf='accountIdRef.errors && accountIdRef.touched' class="alert alert-danger">
+              <div [hidden]='!accountIdRef.errors.required'> Provide Account Id </div>
+              <div *ngIf='accountIdRef.errors.pattern'>Account Id should be only numbers</div>
+              <div *ngIf='accountIdRef.errors.minlength'>Account Id should be of 8 digits</div>
+              <div *ngIf='accountIdRef.errors.maxlength'>Account Id should be of 8 digits</div>
+           </div>
+       </div>
+          
+      <input  type="submit"  value="submit" class="btn btn-success" style="margin-left: 45%">
+  </form>
+  </div>
+  <div *ngIf="confirm" class="alert alert-success box-msg" role="alert">
+<strong>Current Account Balance is :- {{amount}}</strong>
+</div>
+

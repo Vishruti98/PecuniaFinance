@@ -33,14 +33,14 @@ public class CustomerServiceImpl implements CustomerService {
 
 
 	@Override
-	public Customer addUser(Customer customer, Account account) {
+	public long addUser(Customer customer, Account account) {
 		logger.trace("Add User method accessed at service layer");
 		account.setAmount(0.0);
 		customer.setAccount(account);
 		account.setCustomer(customer);
 		user = customerDao.save(customer);
 		accountDao.save(account);
-		return user;
+		return user.getCustomerId();
 	}
 
 	@Override

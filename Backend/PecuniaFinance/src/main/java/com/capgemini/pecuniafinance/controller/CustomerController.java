@@ -40,11 +40,9 @@ public class CustomerController {
 		 * @return Customer: a Customer object is returned to notify that a new Customer Account is added
 	 	*/
 		@PostMapping("/addCustomer")
-		public Customer addUser(@Valid @RequestBody SignUp signup) {
+		public long addUser(@Valid @RequestBody SignUp signup) {
 			logger.trace("Add User method accessed at controller");
-			Customer user = new Customer();
-			user = customerService.addUser(signup.customer, signup.account);
-			return user;
+			return customerService.addUser(signup.customer, signup.account);
 
 		}
 

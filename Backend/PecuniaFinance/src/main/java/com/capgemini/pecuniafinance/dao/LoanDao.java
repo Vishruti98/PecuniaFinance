@@ -34,5 +34,4 @@ public interface LoanDao extends JpaRepository<Loan, Long>{
 	//Retrieves account balance for particular account
 	@Query( value = "select amount from account where account_id = :accountid", nativeQuery=true)
 	double getAccountBalance(@Param("accountid") long account_id);
-	
-}
+} 

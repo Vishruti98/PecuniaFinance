@@ -1,0 +1,10 @@
+.active a {
+
+    background-color: rgb(98, 175, 252) !important;
+    color: white !important;
+   
+  }
+ .navbar{
+     padding: 5px;
+      opacity:1 !important;
+  }

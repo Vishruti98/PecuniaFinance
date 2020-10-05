@@ -39,7 +39,7 @@ public class Customer {
 	private String pan;
 	
 	@Column(name="dob",nullable=false)
-	@JsonFormat(pattern="dd-MM-yyyy")
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date dob;
 	
 	@Column(name="gender",nullable=false)

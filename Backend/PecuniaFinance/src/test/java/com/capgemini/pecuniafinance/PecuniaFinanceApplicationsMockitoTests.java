@@ -21,8 +21,8 @@ class PecuniaFinanceApplicationsMockitoTests {
 	@Test
 	public void testNoCustomerAdded() {
 		CustomerService customerService=mock(CustomerService.class);
-		when(customerService.addUser(null,null)).thenReturn(null);
-		assertEquals(null, customerService.addUser(null,null));
+		when(customerService.addUser(null,null)).thenReturn(0l);
+		assertEquals(0l, customerService.addUser(null,null));
 	}
 	
 	@Test
@@ -36,9 +36,9 @@ class PecuniaFinanceApplicationsMockitoTests {
 		accountNew.setBranch("EPIP Bangalore");
 		Account account = null;
 		Customer customer = null;
-		when(customerService.addUser(customer, account)).thenReturn(custNew);
-		Customer addedCustomer=customerService.addUser(customer,account);
-		assertEquals(1610303l,addedCustomer.getCustomerId());
+		when(customerService.addUser(customer, account)).thenReturn(1l);
+		long addedCustomer=customerService.addUser(customer,account);
+		assertEquals(1l,addedCustomer);
 	}
 	
 	@Test

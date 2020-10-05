@@ -1,0 +1,46 @@
+/*Overall style for form*/
+form {
+  
+    margin: auto auto;
+    width: 60%;
+  }
+  /*Styling for full width input fields*/
+  input[type=text], input[type=password], input[type=number] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: 1px solid rgb(218, 218, 218);
+    border-radius: 4px;
+    background: #f1f1f1;
+  }
+  /* Styling for input fields when in focus*/
+  input[type=text]:focus, input[type=password]:focus {
+    border: 2px;
+    outline: none;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #838383;
+    margin-bottom: 25px;
+  }
+  /* Set a style for all buttons */
+  button {
+    background-color: dodgerblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.8;
+  }
+
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 1;
+  }
+  
+  

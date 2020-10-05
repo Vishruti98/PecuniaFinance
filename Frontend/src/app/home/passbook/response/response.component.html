@@ -1,0 +1,31 @@
+<div  class="container">
+  <h3>Transaction Details</h3>
+  <table class="table table-striped">
+      <caption></caption>
+      <thead>
+          <tr>
+              <th scope="row">TID</th>
+              <th scope="row">Trans-Date</th>
+              <th scope="row">Trans-Type</th>
+              <th scope="row">Amount</th>
+              <th scope="row">Trans-Mode</th>
+              <th scope="row">Cheque No</th>
+              <th scope="row">IFSC</th>
+              <th scope="row">Account Id</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let transaction of transacs">
+              <td>{{transaction.transactionId}}</td>
+              <td>{{transaction.transactionDate}}</td>
+              <td>{{transaction.transactionType}}</td>
+              <td>{{transaction.transactionAmount}}</td>
+              <td>{{transaction.transactionMode}}</td>
+              <td>{{transaction.chequeNumber}}</td>
+              <td>{{transaction.ifsc}}</td>
+              <td>{{transaction.accountId}}</td>
+          </tr>
+      </tbody>
+  </table>
+</div>
+

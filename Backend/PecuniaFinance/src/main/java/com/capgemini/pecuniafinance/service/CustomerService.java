@@ -11,7 +11,7 @@ import com.capgemini.pecuniafinance.model.Customer;
 
 public interface CustomerService {
 	
-	public Customer addUser(Customer customer, Account account);
+	public long addUser(Customer customer, Account account);
 	public Customer updateUser(Customer customer);
 	public List<Customer> getAllCustomer();
 	public Optional<Customer> getCustomerById(long customerId);

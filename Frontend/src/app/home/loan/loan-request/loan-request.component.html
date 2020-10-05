@@ -1,0 +1,146 @@
+<form [formGroup]="loanRequestForm" class="form-horizontal was-validated">
+    <div class="container">
+  
+      <!-- Loan Request page starts -->
+      <h1>Loan Request Application</h1>
+      <p>Please fill in this form to apply for Loan.</p>
+      <hr>
+      <div class="container" style="padding-left:20%">
+       <div class="form-group" >
+         <label for="loanType" style="padding-right:20px"><h4>Loan Type :</h4></label> 
+        
+         <label class="radio-inline"><input type="radio" id="personalLoan" name="loanType" value="Personal Loan" [formControl]="loanType" >Personal Loan</label>
+         <label class="radio-inline"><input type="radio" id="educationLoan" name="loanType" value="Education Loan" [formControl]="loanType" >Education Loan</label>
+         <label class="radio-inline"><input type="radio" id="medicalLoan" name="loanType" value="Medical Loan" [formControl]="loanType" >Medical Loan</label> 
+         <label class="radio-inline"><input type="radio" id="travelLoan" name="loanType" value="Travel Loan" [formControl]="loanType" >Travel Loan</label>
+       
+    </div> 
+  
+    <!-- Input for Loan Amount -->
+      <div class="form-group">
+        <label for="loanAmount"><h4>Loan Amount :</h4></label>
+        <input type="number" 
+        id="loanAmount" 
+        name="loanAmount"
+        placeholder="Enter Loan Amount" 
+        [formControl]="loanAmount"
+        class="form-control"
+        digitOnly>
+
+        <!-- Input validations for loan amount -->
+        <div *ngIf = "!(loanAmount.valid||loanAmount.untouched)">
+          <div *ngIf = "loanAmount.hasError('required')" >
+            <div class="alert alert-danger">Please fill out this field with digits only.</div>
+          </div>
+          <div *ngIf = "loanAmount.hasError('min')">
+            <div class="alert alert-danger">Loan amount cannot be negative.</div>
+        </div>
+       </div>
+       <div *ngIf = "loanAmount.valid">
+        <div class="alert alert-success">Valid.</div>
+       </div>
+
+      </div>
+  
+     <!-- Input for Loan Tenure -->
+      <div class="form-group">
+        <label for="tenure"><h4>Loan Tenure :</h4></label>
+        <input type="number"
+        id="tenure"
+        name="tenure"
+        placeholder="Enter Loan Tenure"
+        [formControl]="tenure"
+        class="form-control"
+        digitOnly>
+
+        <!-- Input validations for loan tenure -->
+        <div *ngIf = "!(tenure.valid||tenure.untouched)">
+          <div *ngIf = "tenure.hasError('required')" >
+            <div class="alert alert-danger">Please fill out this field with only digits.</div>
+          </div>
+          <div *ngIf = "tenure.hasError('pattern')">
+            <div class="alert alert-danger">Loan tenure cannot be in decimals.</div>
+          </div>
+          <div *ngIf = "tenure.hasError('min')">
+            <div class="alert alert-danger">Loan tenure cannot be negative.</div>
+          </div>
+          <div *ngIf = "tenure.hasError('max')">
+            <div class="alert alert-danger">Maximum loan tenure is 500 months.</div>
+          </div>
+        </div>
+       <div *ngIf = "tenure.valid">
+        <div class="alert alert-success">Valid.</div>
+       </div>
+
+      </div>
+     
+     <!-- Input for Credit Score -->
+      <div class="form-group">
+        <label for="creditScore"><h4>Credit Score :</h4></label>
+        <input type="number"
+        id="creditScore"
+        name="creditScore"
+        placeholder="Enter Credit Score"
+        [formControl]="creditScore"
+        class="form-control"
+        digitOnly>
+
+        <!-- Input validations for credit score -->
+        <div *ngIf = "!(creditScore.valid||creditScore.untouched)">
+          <div *ngIf = "creditScore.hasError('required')" >
+            <div class="alert alert-danger">Please fill out this field with only digits.</div>
+          </div>
+          <div *ngIf = "creditScore.hasError('pattern')">
+            <div class="alert alert-danger">Credit score cannot be in decimals.</div>
+          </div>
+          <div *ngIf = "creditScore.hasError('min') || creditScore.hasError('max')">
+            <div class="alert alert-danger">Please enter credit score between 300 and 900.</div>
+          </div>
+        </div>
+        <div *ngIf = "creditScore.valid">
+        <div class="alert alert-success">Valid.</div>
+        </div>
+
+      </div>
+     
+  
+      <button  type="submit" class="registerbtn" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#myModal_create" [disabled]="!loanRequestForm.valid" (click)="onSubmit()">Send For Approval</button>
+      
+     <!-- Modal for Loan Request Processing -->
+      <div class="modal fade" id="myModal_create" role="dialog" >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Loan Request Processing...</h4>
+            </div>
+            <div class="modal-body">
+              <p>Your Loan Request Application is checked for the following criterias: </p><br>
+              <p>1. Loan Amount should be between 1000 ₹ and 2500000 ₹
+                   <img src="/assets/Images/Tickmark.png" *ngIf="loanAmountApproval">
+                <img src="/assets/Images/Crossmark.png" *ngIf="!loanAmountApproval"></p>
+              <p>2. Loan Tenure should be between 12 and 240 months
+                   <img src="/assets/Images/Tickmark.png" *ngIf="loanTenureApproval">
+                <img src="/assets/Images/Crossmark.png" *ngIf="!loanTenureApproval"></p>
+              <p>3. Credit Score should be greater than or equal to 670
+                   <img src="/assets/Images/Tickmark.png" *ngIf="creditScoreApproval">
+                <img src="/assets/Images/Crossmark.png" *ngIf="!creditScoreApproval"></p>
+                <hr>
+                <span class="spinner" *ngIf="!loanStatus" style="float: right;">
+                  <div class="bounce1"></div>
+                  <div class="bounce2"></div>
+                  <div class="bounce3"></div>
+                </span>
+                    <h3 *ngIf="loanStatus=='Accepted'" style="color:green; float: right;"><strong>Approved</strong> </h3>
+                   <p *ngIf="loanStatus=='Accepted'">Your loan amount has been disbursed to your account.</p> 
+                    <h3 *ngIf="loanStatus=='Rejected'" style="color:red;float: right;"><strong>Rejected</strong></h3>
+                
+                <button  type="button" class="registerbtn" style="width: 100%;"data-dismiss="modal" (click)="onClose()">OK</button>
+              
+            </div>
+          </div> 
+        </div>
+      </div> 
+  </div>
+    </div>
+  </form>
+   

@@ -1,0 +1,61 @@
+<div class="container" style="margin-top: 70px;width:70%">
+    <h1 style="text-align: center;">Login</h1>
+
+<hr>
+<br>
+    <div class="row">
+<form [formGroup]="loginForm" >
+   
+    <div class="container" style="width: 100%;">
+        
+        <!-- Input for Loginname -->
+        <label for="customerId"><b>Customer Id</b></label>
+        <input 
+        type="number" 
+        placeholder="Enter Customer Id" 
+        name="customerId" 
+        id="customerId"
+        [formControl]="customerId"
+        class="form-control">
+
+        <div *ngIf = "customerId.invalid && ( customerId.dirty || customerId.touched) ">
+            <div *ngIf = "customerId.hasError('required')" style="color:red">
+                <p class="alert alert-danger">Customer Id is empty!</p>
+            </div>
+        </div>
+       <br>
+
+       <!-- Input for password -->
+        <label for="psw"><b>Password</b></label>
+        <input 
+        type="password" 
+        placeholder="Enter Password" 
+        name="password"
+        id="password"
+        [formControl]="password"
+        class="form-control">
+
+        <div *ngIf = "password.invalid && ( password.dirty || password.touched)">
+            <div *ngIf = "password.hasError('required')" style="color:red">
+                <p class="alert alert-danger"> Password is empty!</p>
+            </div>
+        </div>
+
+        <div class="row"  *ngIf="!isUserLoggedIn">
+            <div class="col-xs-12">
+              <br>
+              <p class="alert alert-danger">
+                  <strong>Customer Id or Password not correct. Please try again!</strong> 
+              </p>
+            </div>
+          </div>
+        <button type="submit" [disabled]="!loginForm.valid" (click)="checkLogin()"> Login </button>
+       
+            <p>Do not have an account?</p>
+            <button type="submit" (click)="onRegister()">Register </button>  
+          
+      </div>
+</form>
+</div>
+</div>
+

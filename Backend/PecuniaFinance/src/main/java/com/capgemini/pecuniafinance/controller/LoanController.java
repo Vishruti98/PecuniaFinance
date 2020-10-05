@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.capgemini.pecuniafinance.error.RecordNotFoundException;
+import com.capgemini.pecuniafinance.model.Account;
 import com.capgemini.pecuniafinance.model.Loan;
 import com.capgemini.pecuniafinance.service.LoanService;
 @RestController
