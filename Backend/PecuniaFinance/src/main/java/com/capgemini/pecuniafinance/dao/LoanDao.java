@@ -31,5 +31,8 @@ public interface LoanDao extends JpaRepository<Loan, Long>{
 	@Transactional
 	int updateBalance(@Param("accountid") long account_id, @Param("balance") double amount);
 	
+	//Retrieves account balance for particular account
+	@Query( value = "select amount from account where account_id = :accountid", nativeQuery=true)
+	double getAccountBalance(@Param("accountid") long account_id);
 	
 }
