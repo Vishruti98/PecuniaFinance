@@ -7,13 +7,7 @@
   <form (ngSubmit)="summary()" #form="ngForm">
       <div class="form-group" >
           <label><strong><em>Account Id:</em></strong> </label>
-          <input required type="text" placeholder="Enter ID" #accountIdRef="ngModel" pattern=[0-9]* minlength="8"  maxlength="8"  name="accountId" [(ngModel)]="accountId" class="form-control">
-          <div *ngIf='accountIdRef.errors && accountIdRef.touched' class="alert alert-danger">
-              <div [hidden]='!accountIdRef.errors.required'> Provide Account Id </div>
-              <div *ngIf='accountIdRef.errors.pattern'>Account Id should be only numbers</div>
-              <div *ngIf='accountIdRef.errors.minlength'>Account Id should be of 8 digits</div>
-              <div *ngIf='accountIdRef.errors.maxlength'>Account Id should be of 8 digits</div>
-              </div>
+          <input required type="text" placeholder="{{accountId}}" value="{{accountId}}"  name="accountId"  class="form-control" disabled>
        </div>
 
        <label><strong><em>Start date:</em></strong> </label>

@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
 export class AccountSummaryComponent implements OnInit {
   transactions: Transactions[];
   transac: any;
-  accountId: number;
+  accountId= localStorage.accountId;
   StartDate: Date;
   EndDate: Date;
   message: string;

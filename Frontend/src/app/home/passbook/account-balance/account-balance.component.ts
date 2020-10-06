@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common';
 export class AccountBalanceComponent implements OnInit {
   account: Account[];
   acc: any;
-  accountId: number;
+  accountId=localStorage.accountId;
 result:any;
 confirm:boolean=false;
 amount:any;

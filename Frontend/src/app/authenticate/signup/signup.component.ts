@@ -76,11 +76,11 @@ export class SignupComponent implements OnInit {
       ])],
       contact:['', Validators.compose([
         Validators.required,
-        Validators.maxLength(10),
+        Validators.max(9999999999),
         CustomValidator.patternValidator(/[6-9][0-9]{9}/,{ hasPattern: true })
       ])],
-      aadhaar: ['',Validators.required],
-      pan: ['',Validators.required],
+      aadhaar: ['',[Validators.required,Validators.min(100000000000),Validators.max(999999999999)]],
+      pan: ['',[Validators.required,Validators.maxLength(10),Validators.minLength(10)]],
       gender: ['',Validators.required],
       dob: ['',Validators.required],
       branch:  ['',Validators.required],

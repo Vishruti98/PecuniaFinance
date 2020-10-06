@@ -68,10 +68,10 @@
           <p class="alert alert-danger"> Contact is required</p>
         </div>
         <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.hasPattern">
-          <p class="alert alert-danger">Contact must start with 6,7,8 or 9  </p>
+          <p class="alert alert-danger">Contact must start with 6,7,8 or 9  and 10 digits long</p>
         </div>
-        <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.maxlength">
-          <p class="alert alert-danger">Contact must contain 10 digits..</p>
+        <div class="text-danger" *ngIf="registrationForm.controls.contact.errors?.max">
+          <p class="alert alert-danger">Contact must contain 10 digits only</p>
         </div>
       </div>
     </div>
@@ -85,8 +85,14 @@
         placeholder="Enter Aadhaar No."
         class="form-control" formControlName="aadhaar">
         <div *ngIf="(registrationForm.controls.aadhaar.touched && registrationForm.controls.aadhaar.errors)">
-          <div class="text-danger" *ngIf="registrationForm.controls.aadhaar.errors.required">
+          <div class="text-danger" *ngIf="registrationForm.controls.aadhaar.errors?.required">
             <p class="alert alert-danger"> Aadhaar No. is required</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.aadhaar.errors?.min">
+            <p class="alert alert-danger">Aadhaar must contain 12 digits</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.aadhaar.errors?.max">
+            <p class="alert alert-danger">Aadhaar must contain 12 digits only</p>
           </div>
         </div>
         
@@ -97,8 +103,14 @@
         <label for="pan">PAN</label>
         <input type="text" id="pan" name="pan" placeholder="Enter PAN" class="form-control" formControlName="pan">
         <div *ngIf="(registrationForm.controls.pan.touched && registrationForm.controls.pan.errors)">
-          <div class="text-danger" *ngIf="registrationForm.controls.pan.errors.required">
+          <div class="text-danger" *ngIf="registrationForm.controls.pan.errors?.required">
             <p class="alert alert-danger"> PAN is required</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.pan.errors?.maxlength">
+            <p class="alert alert-danger">PAN must contain 10 digits only</p>
+          </div>
+          <div class="text-danger" *ngIf="registrationForm.controls.pan.errors?.minlength">
+            <p class="alert alert-danger">PAN must contain 10 digits</p>
           </div>
           </div>
      </div>
@@ -111,22 +123,22 @@
         placeholder="Enter Password"
         class="form-control" formControlName="password">
         <div *ngIf="(registrationForm.controls.password.touched && registrationForm.controls.password.errors) ">
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.required">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.required">
               <p class="alert alert-danger"> Password is required </p>
           </div>
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.minlength">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.minlength">
               <p class="alert alert-danger">Password must contain minimum of 8 characters</p>
           </div>
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasNumber">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.hasNumber">
               <p class="alert alert-danger"> Password must contain atleast one numeric value</p>
           </div>
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasCapitalCase">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.hasCapitalCase">
               <p class="alert alert-danger">Password must contain atleast one Capital letter</p>
           </div>
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasSmallCase">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.hasSmallCase">
               <p class="alert alert-danger"> Password must contin atleast one Small letter</p>
           </div>
-          <div class="text-danger" *ngIf="registrationForm.controls.password.errors.hasSpecialCharacters">
+          <div class="text-danger" *ngIf="registrationForm.controls.password.errors?.hasSpecialCharacters">
               <p class="alert alert-danger"> Password must contain atleast one special character</p>
           </div>
       </div>
@@ -141,7 +153,7 @@
         <option value="Ghaziabad">Ghaziabad</option>
       </select>
       <div *ngIf="(registrationForm.controls.branch.touched && registrationForm.controls.branch.errors) ">
-        <div class="text-danger" *ngIf="registrationForm.controls.branch.errors.required">
+        <div class="text-danger" *ngIf="registrationForm.controls.branch.errors?.required">
           <p class="alert alert-danger"> Branch is required</p>
         </div>
         </div>
@@ -154,7 +166,7 @@
           <option value="salary">Salary Account</option>
         </select>
         <div *ngIf="(registrationForm.controls.accountType.touched && registrationForm.controls.accountType.errors) ">
-          <div class="text-danger" *ngIf="registrationForm.controls.accountType.errors.required">
+          <div class="text-danger" *ngIf="registrationForm.controls.accountType.errors?.required">
             <p class="alert alert-danger"> Account Type is required</p>
           </div>
           </div>
@@ -169,10 +181,11 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
-            <h4 class="modal-title">Online Wallet</h4>
+            <h4 class="modal-title">Pecunia Finance</h4>
           </div>
           <div class="modal-body">
             <p>Your account has successfully been registered!!</p>
+            <p><font color="red">Kindly, wait till your IDs are generated....</font></p>
             <p>Your Customer ID is <font color="blue">{{result?.customerId}}</font></p>
             <p>Your Account Number is <font color="blue"> {{result?.account.accountId}}</font></p>
             <br>
